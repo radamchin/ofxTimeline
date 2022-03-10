@@ -526,7 +526,7 @@ void ofxTimeline::play(){
 
 		isPlaying = true;
         currentTime = ofClamp(currentTime, getInTimeInSeconds(), getOutTimeInSeconds());
-        playbackStartTime = timer.getAppTimeSeconds() - currentTime;
+        playbackStartTime = timer.getAppSeconds() - currentTime;
         playbackStartFrame = ofGetFrameNum() - timecode.frameForSeconds(currentTime);
 		ofxTLPlaybackEventArgs args = createPlaybackEvent();
 		ofNotifyEvent(timelineEvents.playbackStarted, args);
@@ -614,7 +614,7 @@ void ofxTimeline::setCurrentTimecode(string timecodeString){
 void ofxTimeline::setCurrentTimeSeconds(float time){
 	currentTime = time;
     if(isPlaying){
-        playbackStartTime = timer.getAppTimeSeconds() - currentTime;
+        playbackStartTime = timer.getAppSeconds() - currentTime;
         playbackStartFrame = ofGetFrameNum() - timecode.frameForSeconds(currentTime);
     }
  
@@ -1473,7 +1473,7 @@ void ofxTimeline::updateTime(){
 				currentTime = timecode.secondsForFrame(ofGetFrameNum() - playbackStartFrame);
 			}
 			else {
-				currentTime = timer.getAppTimeSeconds() - playbackStartTime;
+				currentTime = timer.getAppSeconds() - playbackStartTime;
 			}
 			checkLoop();
 		}
@@ -1491,7 +1491,7 @@ void ofxTimeline::checkEvents(){
 void ofxTimeline::checkLoop(){
 	if(currentTime < durationInSeconds*inoutRange.min){
         currentTime = durationInSeconds*inoutRange.min;
-        playbackStartTime = timer.getAppTimeSeconds() - currentTime;
+        playbackStartTime = timer.getAppSeconds() - currentTime;
         playbackStartFrame = ofGetFrameNum() - timecode.frameForSeconds(currentTime);
     }
 
@@ -2025,7 +2025,7 @@ ofxTimecode& ofxTimeline::getTimecode(){
     return timecode;
 }
 
-ofxMSATimer& ofxTimeline::getTimer(){
+msa::Timer& ofxTimeline::getTimer(){
 	return timer;
 }
 

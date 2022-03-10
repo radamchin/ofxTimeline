@@ -151,7 +151,7 @@ void ofxTLTrack::_draw(){
 
 unsigned long long ofxTLTrack::currentTrackTime(){
 	if(isPlaying){
-		currentTime = timeline->getTimer().getAppTimeMillis() - playbackStartTime;
+		currentTime = timeline->getTimer().getAppMillis() - playbackStartTime;
 		checkLoop();
 		return currentTime;
 		//return timeline->getInTimeInMillis() + (timeline->getTimer().getAppTimeMillis() - playbackStartTime) % timeline->getInOutRangeMillis().span() ;
@@ -164,7 +164,7 @@ unsigned long long ofxTLTrack::currentTrackTime(){
 void ofxTLTrack::checkLoop(){
 	if(currentTime < timeline->getInTimeInMillis()){
         currentTime = timeline->getInTimeInMillis();
-        playbackStartTime = timeline->getTimer().getAppTimeSeconds() - currentTime;
+        playbackStartTime = timeline->getTimer().getAppSeconds() - currentTime;
 //        playbackStartFrame = ofGetFrameNum() - timecode.frameForSeconds(currentTime);
     }
     
@@ -193,7 +193,7 @@ void ofxTLTrack::play(){
 	if(!isPlaying && !timeline->getIsPlaying()){
 		isPlaying = true;
 		currentTime = ofClamp(timeline->getCurrentTimeMillis(), timeline->getInTimeInMillis(), timeline->getOutTimeInMillis());
-		playbackStartTime = timeline->getTimer().getAppTimeMillis() - currentTime;
+		playbackStartTime = timeline->getTimer().getAppMillis() - currentTime;
 		checkLoop();
 	}
 }

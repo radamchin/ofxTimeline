@@ -40,7 +40,7 @@
 
 //external addons
 #include "ofRange.h"
-#include "ofxMSATimer.h"
+#include "MSATimer.h"
 #include "ofxTimecode.h"
 
 //internal types
@@ -389,7 +389,7 @@ class ofxTimeline : ofThread {
 	
 	ofxTLColors& getColors();
 	ofxTimecode& getTimecode();
-	ofxMSATimer& getTimer();
+	msa::Timer& getTimer();
 	ofxTLZoomer* getZoomer();
 	
 	vector<ofxTLPage*>& getPages();
@@ -441,7 +441,7 @@ class ofxTimeline : ofThread {
   protected:
 
     ofxTimecode timecode;
-	ofxMSATimer timer;
+	msa::Timer timer;
     ofxTLEvents timelineEvents;
     ofxTLColors colors;
 
